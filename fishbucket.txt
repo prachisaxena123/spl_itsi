@@ -1,0 +1,25 @@
+clean your existing data from any of your index before going for re-indexing process, using the commands below.
+
+ i)  # cd $SPLUNK_HOME/bin 
+ii) # ./splunk stop 
+iii) # ./splunk clean eventdata -index  <index-name>
+( to clean All Indexes, just drop off -index <index-name> )
+iv) # ./splunk start
+
+remove/delete the fishbucket sub-directory which should re-index  all your data in all of your indexes.
+CAUTION : Deleting the fishbucket sub-directory will re-index data coming into all your indexes from that splunk forwarder/instance, thus may severely impact your license usage.
+
+To delete/remove the fishbucket:
+
+1. Move to the directory   /opt/splunk/var/lib/splunk  (on the instance forwarding data)
+
+2. Delete/Remove the sub-directory fishbucket 
+
+deleting/removing the fish bucket
+
+i)  #cd $SPLUNK_HOME/var/lib/splunk 
+ii) #rm -rf fishbucket
+
+Restart your splunk instance ($SPLUNK_HOME/bin/splunk restart)
+
+Now, as soon as your files are updated on the application server, the whole contents of your files will be re-indexed into splunk in their corresponding indexes.
