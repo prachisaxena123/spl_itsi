@@ -23,3 +23,11 @@ ii) #rm -rf fishbucket
 Restart your splunk instance ($SPLUNK_HOME/bin/splunk restart)
 
 Now, as soon as your files are updated on the application server, the whole contents of your files will be re-indexed into splunk in their corresponding indexes.
+
+Re-index data without deleting the fishbucket/re-index contents of any specific file 
+i)  #cd $SPLUNK_HOME/bin 
+ii) #./splunk stop 
+iii)#./splunk cmd btprobe -d $SPLUNK_HOME/var/lib/splunk/fishbucket/splunk_private_db --file <File Path> --reset 
+iv) #./splunk start
+
+Note: btprobe: It queries the fishbucket for checkpoints stored by monitor inputs. Any changes you make to the fishbucket using btprobe takes effect only after a restart. 
